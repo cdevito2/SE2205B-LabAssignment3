@@ -12,6 +12,9 @@ class Flow {
 
     public void maximizeFlowNetwork(Graph fN, int s, int t)
     {
+        while(breadthFirstPathSearch(fn, s, t)==1){
+
+        }
 
     }
 
