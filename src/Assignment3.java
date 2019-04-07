@@ -7,12 +7,23 @@ import java.util.Queue;
 //cdevito2 //mdsilva6
 class Flow {
 
+    // made interfaces for Graph and Edge to remove errors
+    /*interface Graph{
+        int numVertices();
+        Edge<E> getEdge(Vertex<V> u, Vertex<V> v);
+    }
+
+    interface Edge<E>{
+        int flowCapacity();
+        int flow();
+    }*/
+
 //last two arguments indicate the
 //labels/numbers assigned to the vertices (start and end nodes
 
     public void maximizeFlowNetwork(Graph fN, int s, int t)
     {
-        while(breadthFirstPathSearch(fn, s, t)==1){
+        while(breadthFirstPathSearch(fN, s, t)==1){
 
         }
 
@@ -22,6 +33,7 @@ class Flow {
     public int breadthFirstPathSearch(Graph FN, int s, int d)
     {
         int visitedNodes[] = new int[FN.numVertices()];
+        int parent[] = new int[FN.numVerticies()]; // one less?
         //initializes an array that is equal in size to the number of vertices in the graph
         for (int i = 0; i < FN.numVertices(); i ++){
             visitedNodes[i] = 0; //setting all elements in visitedNodes array to 0
@@ -30,13 +42,14 @@ class Flow {
         };
         queue.add(s); //change to enqueue(s)?
         visitedNodes[s] = 1;
+        parent[s] = -1;
 
         while(!queue.isEmpty()){
             int x = queue.poll();
-            for (int j = 0; j < FN.numVerticies; j++){
-                Edge<E> edge = FN.getEdge(s,j);
+            for (int j = 0; j < FN.numVertices(); j++){
+                Edge<Integer> edge = FN.getEdge(s,j);
                 if(visitedNodes[j] == 0 && (edge.flowCapacity() - edge.flow())>0){
-                    // set parent of node j to node x
+                    parent[j] = x;
                     queue.add(j);
                     visitedNodes[j] = 1;
                 }
