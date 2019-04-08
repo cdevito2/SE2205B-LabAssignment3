@@ -35,7 +35,7 @@ class Flow {
 
             for (int i = t; i != s; i = parent[i]){
                 int j = parent[i];
-                fN.opposite(j,i) -= pathFlow; // accounting for backflow 
+                fN.opposite(j,i) -= pathFlow; // accounting for backflow
                 fN.opposite(i,j) += pathFlow;
 
             }
